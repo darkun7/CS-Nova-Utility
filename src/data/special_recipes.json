@@ -1,0 +1,25 @@
+{
+  "natural": {
+    "brilliance_shard": 1,
+    "purified": 5,
+    "main_tier": 10,
+    "pair_tier": 7,
+    "pair_count": 3
+  },
+
+  "magical": {
+    "brilliance_shard": 2,
+    "purified": 5,
+    "requires": "natural",
+    "pair_tier": 7,
+    "pair_count": 5
+  },
+
+  "divine": {
+    "brilliance_shard": 3,
+    "purified": 5,
+    "requires": "magical",
+    "pair_tier": 7,
+    "pair_count": 7
+  }
+}

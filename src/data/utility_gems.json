@@ -1,0 +1,93 @@
+{
+  "eternal": {
+    "name": "Eternal",
+    "stat": "HP Regen",
+    "slot": ["helm", "necklace"],
+    "tiers": {
+      "1": 3,
+      "2": 5,
+      "3": 9,
+      "4": 15,
+      "5": 26,
+      "6": 44,
+      "7": 74,
+      "8": 125,
+      "9": 210,
+      "10": 355
+    }
+  },
+
+  "fury": {
+    "name": "Fury",
+    "stat": "Crit",
+    "slot": ["weapon", "offhand"],
+    "tiers": {
+      "1": 1,
+      "2": 2,
+      "3": 4,
+      "4": 7,
+      "5": 12,
+      "6": 20,
+      "7": 33,
+      "8": 55,
+      "9": 93,
+      "10": 157
+    }
+  },
+
+  "malefic": {
+    "name": "Malefic",
+    "stat": "Crit Damage",
+    "slot": ["ring", "offhand"],
+    "tiers": {
+      "5": 1,
+      "6": 2,
+      "7": 3,
+      "8": 5,
+      "9": 9,
+      "10": 15
+    }
+  },
+
+  "resilience": {
+    "name": "Resilience",
+    "stat": "Crit Defense",
+    "slot": ["armor", "necklace"],
+    "tiers": {
+      "5": 3,
+      "6": 5,
+      "7": 8,
+      "8": 13,
+      "9": 22,
+      "10": 38
+    }
+  },
+
+  "speed": {
+    "name": "Speed",
+    "stat": "Attack Speed",
+    "slot": ["ring"],
+    "tiers": {
+      "5": 1,
+      "6": 2,
+      "7": 3,
+      "8": 5,
+      "9": 9,
+      "10": 15
+    }
+  },
+
+  "charge": {
+    "name": "Charge",
+    "stat": "Cast Speed",
+    "slot": ["necklace"],
+    "tiers": {
+      "5": 1,
+      "6": 2,
+      "7": 3,
+      "8": 5,
+      "9": 9,
+      "10": 15
+    }
+  }
+}

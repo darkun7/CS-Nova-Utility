@@ -1,0 +1,39 @@
+{
+  "name": "Soul Crystal",
+  "stackSize": 999,
+  "ratio": 4,
+  "tierOrder": ["VI", "V", "IV", "III", "II", "I"],
+  "tiers": {
+    "VI": {
+      "label": "Tier VI",
+      "isBase": true,
+      "fuseFrom": null,
+      "copperPerCraft": 0
+    },
+    "V": {
+      "label": "Tier V",
+      "fuseFrom": "VI",
+      "copperPerCraft": 80
+    },
+    "IV": {
+      "label": "Tier IV",
+      "fuseFrom": "V",
+      "copperPerCraft": 700
+    },
+    "III": {
+      "label": "Tier III",
+      "fuseFrom": "IV",
+      "copperPerCraft": 2800
+    },
+    "II": {
+      "label": "Tier II",
+      "fuseFrom": "III",
+      "copperPerCraft": 6000
+    },
+    "I": {
+      "label": "Tier I",
+      "fuseFrom": "II",
+      "copperPerCraft": 10000
+    }
+  }
+}

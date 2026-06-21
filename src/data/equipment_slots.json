@@ -1,0 +1,11 @@
+{
+  "weapon":   { "name": "Weapon",   "sockets": 4, "accepts": ["weapon"] },
+  "helm":     { "name": "Helm",     "sockets": 3, "accepts": ["helm"] },
+  "armor":    { "name": "Armor",    "sockets": 4, "accepts": ["armor"] },
+  "boots":    { "name": "Boots",    "sockets": 3, "accepts": ["boots"] },
+  "gloves":   { "name": "Gloves",   "sockets": 3, "accepts": ["gloves"] },
+  "necklace": { "name": "Necklace", "sockets": 2, "accepts": ["necklace"] },
+  "ring1":    { "name": "Ring 1",   "sockets": 2, "accepts": ["ring"] },
+  "ring2":    { "name": "Ring 2",   "sockets": 2, "accepts": ["ring"] },
+  "offhand":  { "name": "Offhand",  "sockets": 2, "accepts": ["offhand"] }
+}

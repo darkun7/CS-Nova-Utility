@@ -1,0 +1,55 @@
+{
+  "normal": [
+    {
+      "fragneron": 1,
+      "ruby_tier": 5,
+      "ruby_qty": 8,
+      "topaz_tier": 5,
+      "topaz_qty": 8,
+      "purified": 2
+    },
+    {
+      "fragneron": 4,
+      "ruby_tier": 7,
+      "ruby_qty": 5,
+      "topaz_tier": 7,
+      "topaz_qty": 5,
+      "purified": 5
+    },
+    {
+      "fragneron": 15,
+      "ruby_tier": 10,
+      "ruby_qty": 1,
+      "topaz_tier": 10,
+      "topaz_qty": 1,
+      "purified": 20
+    }
+  ],
+
+  "bound": [
+    {
+      "fragneron": 1,
+      "ruby_tier": 5,
+      "ruby_qty": 14,
+      "topaz_tier": 5,
+      "topaz_qty": 14,
+      "purified": 2
+    },
+    {
+      "fragneron": 4,
+      "ruby_tier": 7,
+      "ruby_qty": 8,
+      "topaz_tier": 7,
+      "topaz_qty": 8,
+      "purified": 5
+    },
+    {
+      "fragneron": 15,
+      "ruby_tier": 10,
+      "ruby_qty": 2,
+      "topaz_tier": 10,
+      "topaz_qty": 2,
+      "purified": 20
+    }
+  ]
+}

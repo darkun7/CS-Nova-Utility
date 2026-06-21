@@ -1,0 +1,131 @@
+{
+  "ruby": {
+    "name": "Ruby",
+    "stat": "PATK",
+    "slot": ["weapon"],
+    "pair": "speed",
+    "tiers": {
+      "1": 4,
+      "2": 7,
+      "3": 12,
+      "4": 20,
+      "5": 33,
+      "6": 56,
+      "7": 94,
+      "8": 159,
+      "9": 268,
+      "10": 452,
+      "natural": 558,
+      "magical": 733,
+      "divine": 1005
+    }
+  },
+
+  "topaz": {
+    "name": "Topaz",
+    "stat": "MATK",
+    "slot": ["weapon"],
+    "pair": "charge",
+    "tiers": {
+      "1": 4,
+      "2": 7,
+      "3": 12,
+      "4": 20,
+      "5": 33,
+      "6": 56,
+      "7": 94,
+      "8": 159,
+      "9": 268,
+      "10": 452,
+      "natural": 558,
+      "magical": 733,
+      "divine": 1005
+    }
+  },
+
+  "amber": {
+    "name": "Amber",
+    "stat": "PDEF",
+    "slot": ["armor", "boots"],
+    "pair": "resilience",
+    "tiers": {
+      "1": 4,
+      "2": 7,
+      "3": 12,
+      "4": 20,
+      "5": 33,
+      "6": 56,
+      "7": 94,
+      "8": 159,
+      "9": 268,
+      "10": 452,
+      "natural": 558,
+      "magical": 733,
+      "divine": 1005
+    }
+  },
+
+  "sapphire": {
+    "name": "Sapphire",
+    "stat": "MDEF",
+    "slot": ["helm", "boots"],
+    "pair": "resilience",
+    "tiers": {
+      "1": 4,
+      "2": 7,
+      "3": 12,
+      "4": 20,
+      "5": 33,
+      "6": 56,
+      "7": 94,
+      "8": 159,
+      "9": 268,
+      "10": 452,
+      "natural": 558,
+      "magical": 733,
+      "divine": 1005
+    }
+  },
+
+  "jade": {
+    "name": "Jade",
+    "stat": "HP",
+    "slot": ["helm", "armor", "boots"],
+    "tiers": {
+      "1": 32,
+      "2": 54,
+      "3": 92,
+      "4": 155,
+      "5": 261,
+      "6": 439,
+      "7": 741,
+      "8": 1248,
+      "9": 2104,
+      "10": 3546,
+      "natural": 4378,
+      "magical": 5746,
+      "divine": 7880
+    }
+  },
+
+  "emerald": {
+    "name": "Emerald",
+    "stat": "Heal",
+    "slot": ["weapon", "gloves"],
+    "tiers": {
+      "1": 6,
+      "2": 11,
+      "3": 18,
+      "4": 31,
+      "5": 52,
+      "6": 87,
+      "7": 147,
+      "8": 247,
+      "9": 417,
+      "10": 702,
+      "natural": 836,
+      "magical": 1050,
+      "divine": 1365
+    }
+  }
+}
