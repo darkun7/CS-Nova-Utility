@@ -119,6 +119,70 @@ export function tierBreakdown(baseQty) {
   return out;
 }
 
+/* ---------- Human-readable durations (Carbon::diffForHumans-ish) ----------
+   Inputs are milliseconds. Negative means past, positive means future. */
+
+const _DUR_UNITS = [
+  { k: 'year',   ms: 365 * 24 * 60 * 60 * 1000 },
+  { k: 'month',  ms: 30  * 24 * 60 * 60 * 1000 },
+  { k: 'week',   ms: 7   * 24 * 60 * 60 * 1000 },
+  { k: 'day',    ms:       24 * 60 * 60 * 1000 },
+  { k: 'hour',   ms:            60 * 60 * 1000 },
+  { k: 'minute', ms:                 60 * 1000 },
+  { k: 'second', ms:                      1000 }
+];
+
+/* humanizeDuration(ms, { parts: 2, short: false })
+   - parts: how many largest non-zero units to include (default 2)
+   - short: 'in 2h 5m' / '3d 4h ago'  vs 'in 2 hours 5 minutes' */
+export function humanizeDuration(ms, opts = {}) {
+  const { parts = 2, short = false } = opts;
+  let abs = Math.max(0, Math.abs(Math.floor(ms)));
+  const out = [];
+  for (const u of _DUR_UNITS) {
+    if (out.length >= parts) break;
+    const v = Math.floor(abs / u.ms);
+    if (v > 0) {
+      abs -= v * u.ms;
+      if (short) {
+        const tag = u.k === 'month' ? 'mo' : u.k[0]; // y mo w d h m s
+        out.push(`${v}${tag}`);
+      } else {
+        out.push(`${v} ${u.k}${v === 1 ? '' : 's'}`);
+      }
+    } else if (out.length > 0) {
+      // Skip zero gaps to avoid "2 hours 0 minutes"
+      break;
+    }
+  }
+  if (out.length === 0) return short ? '0s' : '0 seconds';
+  return out.join(' ');
+}
+
+/* Carbon-like "in 5 minutes" / "3 hours ago" / "now". */
+export function diffForHumans(ms, opts = {}) {
+  if (ms == null || isNaN(ms)) return '';
+  const abs = Math.abs(ms);
+  if (abs < 1000) return 'now';
+  const text = humanizeDuration(abs, opts);
+  return ms >= 0 ? `in ${text}` : `${text} ago`;
+}
+
+/* Strict HH:MM:SS countdown for live timers (always shows hours).
+   Negative values are clamped to 0. */
+export function formatCountdown(ms) {
+  let s = Math.max(0, Math.floor((ms || 0) / 1000));
+  const d = Math.floor(s / 86400);
+  s -= d * 86400;
+  const h = Math.floor(s / 3600);
+  s -= h * 3600;
+  const m = Math.floor(s / 60);
+  s -= m * 60;
+  const pad = (n) => String(n).padStart(2, '0');
+  if (d > 0) return `${d}d ${pad(h)}:${pad(m)}:${pad(s)}`;
+  return `${pad(h)}:${pad(m)}:${pad(s)}`;
+}
+
 /* Format a quantity with stack info. e.g. stackInfo(4096, 999)
    -> "4,096 (5 stacks)". For qty < stackSize we show "(<1 stack)". */
 export function stackInfo(qty, stackSize) {

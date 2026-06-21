@@ -10,6 +10,7 @@
   import Fragneron from './views/Fragneron.svelte';
   import Inventory from './views/Inventory.svelte';
   import Equipment from './views/Equipment.svelte';
+  import Events    from './views/Events.svelte';
   import Settings  from './views/Settings.svelte';
 
   import { settings, state } from './lib/stores.js';
@@ -21,6 +22,7 @@
     { id: 'fragneron', label: 'Fragneron Planner' },
     { id: 'inventory', label: 'Inventory' },
     { id: 'equipment', label: 'Equipment Builder' },
+    { id: 'events',    label: 'Events' },
     { id: 'settings',  label: 'Settings' }
   ];
 
@@ -122,6 +124,7 @@
       {:else if active === 'fragneron'}<Fragneron />
       {:else if active === 'inventory'}<Inventory />
       {:else if active === 'equipment'}<Equipment />
+      {:else if active === 'events'}<Events />
       {:else if active === 'settings'}<Settings />
       {/if}
     </section>
