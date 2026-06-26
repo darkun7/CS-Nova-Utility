@@ -11,6 +11,7 @@
   import Inventory from './views/Inventory.svelte';
   import Equipment from './views/Equipment.svelte';
   import Events    from './views/Events.svelte';
+  import Quiz      from './views/Quiz.svelte';
   import Settings  from './views/Settings.svelte';
 
   import { settings, state } from './lib/stores.js';
@@ -23,6 +24,7 @@
     { id: 'inventory', label: 'Inventory' },
     { id: 'equipment', label: 'Equipment Builder' },
     { id: 'events',    label: 'Events' },
+    { id: 'quiz',      label: 'Quiz' },
     { id: 'settings',  label: 'Settings' }
   ];
 
@@ -125,6 +127,7 @@
       {:else if active === 'inventory'}<Inventory />
       {:else if active === 'equipment'}<Equipment />
       {:else if active === 'events'}<Events />
+      {:else if active === 'quiz'}<Quiz />
       {:else if active === 'settings'}<Settings />
       {/if}
     </section>
