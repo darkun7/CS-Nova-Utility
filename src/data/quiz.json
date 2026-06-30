@@ -262,5 +262,73 @@
   {
     "question": "In which US state is Hollywood located?",
     "answer": "California"
+  },
+  {
+    "question": "Approximately how many years is the orbital period of Halley's Comet?",
+    "answer": "76 years"
+  },
+  {
+    "question": "In a game of chess, how many pieces does each side (Black and White) have?",
+    "answer": "16"
+  },
+  {
+    "question": "What is the ideal water temperature for brewing tea?",
+    "answer": "80°C"
+  },
+  {
+    "question": "Who discovered that white light is composed of the seven colors of the spectrum?",
+    "answer": "Newton"
+  },
+  {
+    "question": "Which element is particularly beneficial for a healthy childbirth?",
+    "answer": "Zinc"
+  },
+  {
+    "question": "Which of the following vegetables is particularly rich in iron?",
+    "answer": "Spinach"
+  },
+  {
+    "question": "Which number is traditionally considered the most unlucky in Western culture?",
+    "answer": "13"
+  },
+  {
+    "question": "What is the lowest elevation point of the Dead Sea?",
+    "answer": "-392 m"
+  },
+  {
+    "question": "How many teeth does a typical healthy adult have?",
+    "answer": "32"
+  },
+  {
+    "question": "What color does the sky appear to be when viewed from the Moon?",
+    "answer": "Black"
+  },
+  {
+    "question": "Which country is widely considered to produce the world's finest coffee?",
+    "answer": "Jamaica"
+  },
+  {
+    "question": "What is the primary source of water vapor in the Earth's atmosphere?",
+    "answer": "Surface Evaporation"
+  },
+  {
+    "question": "If all the blood vessels in an adult were connected, what would be their total length?",
+    "answer": "100,000 km"
+  },
+  {
+    "question": "Where does the United States rank in terms of total land area?",
+    "answer": "4th"
+  },
+  {
+    "question": "What was the longest-lasting strike in global labor history?",
+    "answer": "Canton-Hong Kong Strike"
+  },
+  {
+    "question": "Which of the world's four major oceans covers the smallest surface area?",
+    "answer": "Arctic Ocean"
+  },
+  {
+    "question": "Which of the following works was written by Alexandre Dumas fils?",
+    "answer": "The Lady of the Camellias"
   }
 ]

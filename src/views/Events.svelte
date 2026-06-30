@@ -4,33 +4,29 @@
   import { toast } from '../lib/stores.js';
   import { formatCountdown, diffForHumans } from '../lib/utils.js';
 
-  /* Source of truth for the events feed. */
   const EVENTS_URL =
     'https://script.googleusercontent.com/macros/echo' +
     '?user_content_key=AUkAhnRG6D_YlyYdyK71ZTfmSPgPXcoUYXgllo_H7-o3vxRFaCSo2uHpUtXVWm6HGzK9Yb7j1zCHYqXhWiHib3jOHhwXlg7AvqkTL3OrCvkUbUeQlvXFAET__jJEzLHiYPBn78mMoLWyvtEHvTBq2SegGnLSkSvoBxpH6OPU1Ks7SSbTZTTCFrqt9diUGpscnsi0xlsIoFaOG00NHgAzobeq2otzxbgtkDaw8M2VVzNikOA1ejikaaoU78zLJiSAd3VGN4dKYAnW_64ccn0jvnBmL4iqXin-Mg' +
     '&lib=MJ-WxscKk8CCxLG9A5Acarf1AKxgSVOtc';
 
-  /* Server is GMT-4, user clock for the planned target is GMT+7.
-     We always compute event UTC instants from serverTime to avoid drift. */
-  const SERVER_OFFSET_HOURS = -4;   // server clock minus UTC
-  const LOCAL_OFFSET_HOURS  = 7;    // displayed "local" clock (GMT+7)
+  const SERVER_OFFSET_HOURS = -4;
+  const LOCAL_OFFSET_HOURS  = 7;
 
-  let raw = null;            // last successful payload
+  let raw = null;
   let loading = true;
   let error = '';
   let now = Date.now();
   let lastFetched = null;
   let category = 'all';
+  let section = 'upcoming'; // 'upcoming' | 'recent'
   let refreshTimer;
   let tickTimer;
 
   /* ----- Time math --------------------------------------------------- */
 
-  /* Next UTC ms at which the server clock reads HH:MM today/tomorrow. */
   function nextOccurrenceUTC(hhmm, fromMs) {
     const [h, m] = hhmm.split(':').map(Number);
     const from = new Date(fromMs);
-    /* The UTC hour matching server HH:MM today. */
     const utcH = (h - SERVER_OFFSET_HOURS + 24) % 24;
     let target = Date.UTC(
       from.getUTCFullYear(),
@@ -38,21 +34,30 @@
       from.getUTCDate(),
       utcH, m, 0, 0
     );
-    /* If we crossed midnight (server day is offset from UTC day) the
-       computed instant may be in the past; bump by 24h until it is in
-       the future of `fromMs`. */
     while (target <= fromMs) target += 24 * 60 * 60 * 1000;
     return target;
   }
 
-  /* Format an absolute UTC ms as HH:MM in a fixed UTC-offset zone. */
+  function previousOccurrenceUTC(hhmm, fromMs) {
+    const [h, m] = hhmm.split(':').map(Number);
+    const from = new Date(fromMs);
+    const utcH = (h - SERVER_OFFSET_HOURS + 24) % 24;
+    let target = Date.UTC(
+      from.getUTCFullYear(),
+      from.getUTCMonth(),
+      from.getUTCDate(),
+      utcH, m, 0, 0
+    );
+    while (target > fromMs) target -= 24 * 60 * 60 * 1000;
+    return target;
+  }
+
   function fmtAtOffset(utcMs, offsetHours) {
     const d = new Date(utcMs + offsetHours * 60 * 60 * 1000);
     const pad = (n) => String(n).padStart(2, '0');
     return `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`;
   }
 
-  /* Render in the actual machine timezone too (handy if user isn't on GMT+7). */
   function fmtBrowserLocal(utcMs) {
     return new Date(utcMs).toLocaleTimeString([], {
       hour: '2-digit', minute: '2-digit', hour12: false
@@ -65,7 +70,6 @@
     try {
       loading = !raw;
       error = '';
-      /* Cache-buster keeps the Apps Script CDN from pinning a stale copy. */
       const res = await fetch(EVENTS_URL + '&_=' + Date.now(), { cache: 'no-store' });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const json = await res.json();
@@ -85,7 +89,6 @@
 
   onMount(() => {
     load();
-    /* Live countdown ticks each second; data refresh every 5 minutes. */
     tickTimer    = setInterval(() => (now = Date.now()), 1000);
     refreshTimer = setInterval(() => load(false), 5 * 60 * 1000);
   });
@@ -97,7 +100,7 @@
 
   /* ----- Derived view model ------------------------------------------ */
 
-  $: enriched = (raw?.events || [])
+  $: enrichedUpcoming = (raw?.events || [])
     .filter(e => e && e.enabled !== false && e.serverTime)
     .map(e => {
       const nextUtc = nextOccurrenceUTC(e.serverTime, now);
@@ -105,22 +108,40 @@
         ...e,
         nextUtc,
         msLeft:        nextUtc - now,
-        serverDisplay: fmtAtOffset(nextUtc, SERVER_OFFSET_HOURS), // GMT-4
-        localDisplay:  fmtAtOffset(nextUtc, LOCAL_OFFSET_HOURS),  // GMT+7
+        serverDisplay: fmtAtOffset(nextUtc, SERVER_OFFSET_HOURS),
+        localDisplay:  fmtAtOffset(nextUtc, LOCAL_OFFSET_HOURS),
         browserDisplay: fmtBrowserLocal(nextUtc)
       };
     })
     .sort((a, b) => a.msLeft - b.msLeft);
 
-  $: categories = ['all', ...Array.from(new Set(enriched.map(e => e.category)))];
+  $: enrichedRecent = (raw?.events || [])
+    .filter(e => e && e.enabled !== false && e.serverTime)
+    .map(e => {
+      const prevUtc = previousOccurrenceUTC(e.serverTime, now);
+      const msAgo = now - prevUtc;
+      return {
+        ...e,
+        prevUtc,
+        msAgo,
+        serverDisplay: fmtAtOffset(prevUtc, SERVER_OFFSET_HOURS),
+        localDisplay:  fmtAtOffset(prevUtc, LOCAL_OFFSET_HOURS),
+        browserDisplay: fmtBrowserLocal(prevUtc)
+      };
+    })
+    .filter(e => e.msAgo >= 0 && e.msAgo <= 60 * 60 * 1000)
+    .sort((a, b) => a.msAgo - b.msAgo);
+
+  $: currentEnriched = section === 'upcoming' ? enrichedUpcoming : enrichedRecent;
+
+  $: categories = ['all', ...Array.from(new Set(currentEnriched.map(e => e.category)))];
 
   $: visible = category === 'all'
-    ? enriched
-    : enriched.filter(e => e.category === category);
+    ? currentEnriched
+    : currentEnriched.filter(e => e.category === category);
 
-  $: nextUp = enriched[0];
+  $: nextUp = enrichedUpcoming[0];
 
-  /* Visual urgency: <= 10 minutes => imminent; <= 1 hour => soon. */
   function urgencyClass(ms) {
     if (ms <= 10 * 60 * 1000) return 'text-rose-300';
     if (ms <= 60 * 60 * 1000) return 'text-amber-300';
@@ -128,8 +149,6 @@
   }
 
   function categoryBadge(cat) {
-    /* Tailwind utility classes layered on .badge — keeps colors close to
-       the existing palette without relying on undefined badge-* variants. */
     switch (cat) {
       case 'PVP':    return 'bg-rose-900/40 text-rose-200 border-rose-700/50';
       case 'Boss':   return 'badge-gold';
@@ -142,9 +161,25 @@
 </script>
 
 <div class="space-y-4">
+  <!-- Section tabs -->
+  <div class="flex gap-1 bg-arcane-panel2 rounded-lg p-1 border border-arcane-border w-fit">
+    <button
+      class="px-4 py-2 text-sm rounded-md font-medium transition-colors
+             {section === 'upcoming' ? 'bg-arcane-panel text-arcane-gold shadow-sm' : 'text-slate-400 hover:text-slate-200'}"
+      on:click={() => (section = 'upcoming')}
+    >Upcoming Events</button>
+    <button
+      class="px-4 py-2 text-sm rounded-md font-medium transition-colors
+             {section === 'recent' ? 'bg-arcane-panel text-arcane-gold shadow-sm' : 'text-slate-400 hover:text-slate-200'}"
+      on:click={() => (section = 'recent')}
+    >Recent Events</button>
+  </div>
+
   <!-- Hero / next-up card -->
   <Card>
-    <span slot="header">Upcoming Events</span>
+    <span slot="header">
+      {section === 'upcoming' ? 'Upcoming Events' : 'Recent Events'}
+    </span>
     <span slot="actions">
       <button class="btn" on:click={() => load(true)} disabled={loading}>
         {loading ? 'Loading…' : 'Refresh'}
@@ -155,33 +190,62 @@
       <div class="text-rose-300 text-sm">Failed to load events: {error}</div>
     {:else if !raw}
       <div class="text-slate-500 text-sm">Loading…</div>
-    {:else if !nextUp}
-      <div class="text-slate-500 text-sm">No active events.</div>
+    {:else if section === 'upcoming'}
+      {#if !nextUp}
+        <div class="text-slate-500 text-sm">No upcoming events.</div>
+      {:else}
+        <div class="grid md:grid-cols-2 gap-4 items-center">
+          <div>
+            <div class="text-xs text-slate-400 uppercase tracking-widest">Next up</div>
+            <div class="text-xl md:text-2xl font-semibold text-arcane-gold">
+              {nextUp.event}
+            </div>
+            <div class="mt-1 text-sm text-slate-300">
+              <span class="badge {categoryBadge(nextUp.category)}">{nextUp.category}</span>
+              <span class="ml-2">{nextUp.message || ''}</span>
+            </div>
+            <div class="mt-3 text-sm text-slate-400">
+              Starts {diffForHumans(nextUp.msLeft)}
+            </div>
+          </div>
+          <div class="text-center md:text-right">
+            <div class="text-xs text-slate-400 uppercase tracking-widest">Countdown</div>
+            <div class="font-display text-4xl md:text-5xl tracking-wider {urgencyClass(nextUp.msLeft)}">
+              {formatCountdown(nextUp.msLeft)}
+            </div>
+            <div class="mt-1 text-xs text-slate-500">
+              Server {nextUp.serverDisplay} · Local {nextUp.localDisplay}
+            </div>
+          </div>
+        </div>
+      {/if}
     {:else}
-      <div class="grid md:grid-cols-2 gap-4 items-center">
-        <div>
-          <div class="text-xs text-slate-400 uppercase tracking-widest">Next up</div>
-          <div class="text-xl md:text-2xl font-semibold text-arcane-gold">
-            {nextUp.event}
+      {#if enrichedRecent.length === 0}
+        <div class="text-slate-500 text-sm">No events started in the last hour.</div>
+      {:else}
+        <div class="grid md:grid-cols-2 gap-4 items-center">
+          <div>
+            <div class="text-xs text-amber-400 uppercase tracking-widest">Running now</div>
+            <div class="text-xl md:text-2xl font-semibold text-arcane-gold">
+              {enrichedRecent[0].event}
+            </div>
+            <div class="mt-1 text-sm text-slate-300">
+              <span class="badge {categoryBadge(enrichedRecent[0].category)}">{enrichedRecent[0].category}</span>
+              <span class="ml-2">{enrichedRecent[0].message || ''}</span>
+            </div>
+            <div class="mt-3 text-sm text-slate-400">
+              Started {diffForHumans(-enrichedRecent[0].msAgo)}
+            </div>
           </div>
-          <div class="mt-1 text-sm text-slate-300">
-            <span class="badge {categoryBadge(nextUp.category)}">{nextUp.category}</span>
-            <span class="ml-2">{nextUp.message || ''}</span>
-          </div>
-          <div class="mt-3 text-sm text-slate-400">
-            Starts {diffForHumans(nextUp.msLeft)}
+          <div class="text-center md:text-right">
+            <div class="text-xs text-slate-400 uppercase tracking-widest">Elapsed</div>
+            <div class="font-display text-4xl md:text-5xl tracking-wider text-emerald-400">
+              {formatCountdown(enrichedRecent[0].msAgo)}
+            </div>
+            <div class="mt-1 text-xs text-slate-500">{diffForHumans(-enrichedRecent[0].msAgo)}</div>
           </div>
         </div>
-        <div class="text-center md:text-right">
-          <div class="text-xs text-slate-400 uppercase tracking-widest">Countdown</div>
-          <div class="font-display text-4xl md:text-5xl tracking-wider {urgencyClass(nextUp.msLeft)}">
-            {formatCountdown(nextUp.msLeft)}
-          </div>
-          <div class="mt-1 text-xs text-slate-500">
-            Server {nextUp.serverDisplay} · Local {nextUp.localDisplay}
-          </div>
-        </div>
-      </div>
+      {/if}
     {/if}
   </Card>
 
@@ -198,7 +262,7 @@
   {/if}
 
   <!-- Full list -->
-  <Card title="Schedule">
+  <Card title={section === 'upcoming' ? 'Schedule' : 'Recently Started'}>
     <span slot="actions">
       {#if lastFetched}
         <span class="text-xs text-slate-500">
@@ -211,7 +275,7 @@
       <div class="text-slate-500 text-sm">Loading…</div>
     {:else if visible.length === 0}
       <div class="text-slate-500 text-sm">No events in this category.</div>
-    {:else}
+    {:else if section === 'upcoming'}
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead>
@@ -241,6 +305,42 @@
                 <td class="py-2 pr-3 text-slate-400">{diffForHumans(ev.msLeft)}</td>
                 <td class="py-2 pr-3 text-right tabular-nums font-semibold {urgencyClass(ev.msLeft)}">
                   {formatCountdown(ev.msLeft)}
+                </td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
+    {:else}
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-left text-xs uppercase tracking-wider text-slate-400 border-b border-arcane-border">
+              <th class="py-2 pr-3">Event</th>
+              <th class="py-2 pr-3">Category</th>
+              <th class="py-2 pr-3">Server (GMT-4)</th>
+              <th class="py-2 pr-3">Local (GMT+7)</th>
+              <th class="py-2 pr-3">Started</th>
+              <th class="py-2 pr-3 text-right">Elapsed</th>
+            </tr>
+          </thead>
+          <tbody>
+            {#each visible as ev}
+              <tr class="border-b border-arcane-border/50 hover:bg-arcane-panel2/40">
+                <td class="py-2 pr-3">
+                  <div class="text-slate-100">{ev.event}</div>
+                  {#if ev.message}
+                    <div class="text-xs text-slate-500">{ev.message}</div>
+                  {/if}
+                </td>
+                <td class="py-2 pr-3">
+                  <span class="badge {categoryBadge(ev.category)}">{ev.category}</span>
+                </td>
+                <td class="py-2 pr-3 tabular-nums text-slate-300">{ev.serverDisplay}</td>
+                <td class="py-2 pr-3 tabular-nums text-slate-300">{ev.localDisplay}</td>
+                <td class="py-2 pr-3 text-slate-400">{diffForHumans(-ev.msAgo)}</td>
+                <td class="py-2 pr-3 text-right tabular-nums font-semibold text-emerald-400">
+                  {formatCountdown(ev.msAgo)}
                 </td>
               </tr>
             {/each}
