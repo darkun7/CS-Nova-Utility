@@ -177,7 +177,7 @@
   },
   {
     "question": "What is the primary purpose of a fuse in a residential electrical circuit?",
-    "answer": "Safety (protecting the circuit from excessive current)"
+    "answer": "Safety"
   },
   {
     "question": "Which of the following is considered the cleanest source of energy?",
@@ -185,7 +185,7 @@
   },
   {
     "question": "Where can you find about 2 months of constant night and 3 months of constant day?",
-    "answer": "Barrow, Alaska (Utqiaġvik)"
+    "answer": "Barrow, Alaska"
   },
   {
     "question": "What was the first history book in the world to be written on paper?",
@@ -248,7 +248,7 @@
     "answer": "36 V"
   },
   {
-    "question": "What is the only man-made structure visible from the Moon? (common quiz answer)",
+    "question": "What is the only man-made structure visible from the Moon?",
     "answer": "Great Wall"
   },
   {
@@ -330,5 +330,101 @@
   {
     "question": "Which of the following works was written by Alexandre Dumas fils?",
     "answer": "The Lady of the Camellias"
+  },
+  {
+    "question": "What is the boiling point of pure water at standard pressure on the Fahrenheit scale?",
+    "answer": "212°F"
+  },
+  {
+    "question": "Which of the following novels was written by Japanese author Natsume Soseki?",
+    "answer": "I Am a Cat"
+  },
+  {
+    "question": "What is the official name of the trophy for the women's world team badminton?",
+    "answer": "Uber Cup"
+  },
+  {
+    "question": "In which country did the sport of ice hockey originate during the 1870s?",
+    "answer": "Canada"
+  },
+  {
+    "question": "In what year did Chinese scientists first successfully synthesize insulin?",
+    "answer": "1965"
+  },
+  {
+    "question": "How long is the longest cell in the human body?",
+    "answer": "1 m"
+  },
+  {
+    "question": "On which date is the Western holiday of Valentine's Day celebrated?",
+    "answer": "February 14"
+  },
+  {
+    "question": "Which of the world's seven continents has the smallest total land area?",
+    "answer": "Oceania"
+  },
+    {
+    "question": "Who is the Goddess of Love and Beauty in ancient Greek mythology?",
+    "answer": "Aphrodite"
+  },
+  {
+    "question": "Which two major bodies of water does the Suez Canal connect?",
+    "answer": "Mediterranean Sea & Red Sea"
+  },
+  {
+    "question": "On which day is the Christian holiday of Christmas celebrated?",
+    "answer": "December 25"
+  },
+  {
+    "question": "What is the boiling point of pure water at standard pressure on the Fahrenheit scale?",
+    "answer": "212°F"
+  },
+   {
+    "question": "Which geological process is responsible for the formation of U-shaped valleys?",
+    "answer": "Glacial Erosion"
+  },
+  {
+    "question": "In what year was the first electronic general-purpose computer invented?",
+    "answer": "1946"
+  },
+  {
+    "question": "In what year were the first modern Olympic Games held?",
+    "answer": "1896"
+  },
+  {
+    "question": "In a deck of cards, what do Diamonds traditionally represent?",
+    "answer": "Wealth"
+  },
+  {
+    "question": "In which century were the first African slaves transported to Haiti?",
+    "answer": "16th Century"
+  },
+    {
+    "question": "What was the original practical purpose of the long jump in ancient times?",
+    "answer": "Escaping beasts"
+  },
+  {
+    "question": "What does the yellow ring on the Olympic flag represent?",
+    "answer": "Asia"
+  },
+  {
+    "question": "On which date is the holiday of \"April Fools' Day\" celebrated each year?",
+    "answer": "April 1"
+  },
+  {
+    "question": "In which country did the traditional \"Mazurka\" dance originate?",
+    "answer": "Poland"
+  },
+  {
+    "question": "Which of the following symphonies was NOT composed by Beethoven?",
+    "answer": "Pathetique"
+  },
+  {
+    "question": "What is the standard English abbreviation for a Local Area Network?",
+    "answer": "LAN"
+  },
+  {
+    "question": "Which composer is famously known as the \"Poet of the Piano\"?",
+    "answer": "Chopin"
   }
 ]
