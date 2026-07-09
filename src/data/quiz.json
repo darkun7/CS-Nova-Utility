@@ -375,10 +375,6 @@
     "question": "On which day is the Christian holiday of Christmas celebrated?",
     "answer": "December 25"
   },
-  {
-    "question": "What is the boiling point of pure water at standard pressure on the Fahrenheit scale?",
-    "answer": "212°F"
-  },
    {
     "question": "Which geological process is responsible for the formation of U-shaped valleys?",
     "answer": "Glacial Erosion"
@@ -426,5 +422,45 @@
   {
     "question": "Which composer is famously known as the \"Poet of the Piano\"?",
     "answer": "Chopin"
+  },
+    {
+    "question": "How much time after application does it take for perfume to reach its peak scent?",
+    "answer": "40 mins"
+  },
+  {
+    "question": "How many bones are in the skeleton of a typical healthy adult?",
+    "answer": "206"
+  },
+  {
+    "question": "Which scientist proposed the Theory of Relativity in the early 20th century?",
+    "answer": "Einstein"
+  },
+  {
+    "question": "At what percentage above standard weight is a person considered obese?",
+    "answer": "20%"
+  },
+  {
+    "question": "By how many times does the volume of a sphere increase if its diameter is doubled?",
+    "answer": "8x"
+  },
+    {
+    "question": "Above what minimum caliber (in mm) is a weapon classified as artillery?",
+    "answer": "20 mm"
+  },
+  {
+    "question": "In what year was the first Nobel Prize in Literature awarded?",
+    "answer": "1901"
+  },
+  {
+    "question": "In what year was the United States Declaration of Independence signed?",
+    "answer": "1776"
+  },
+  {
+    "question": "What is the oldest and most complete written legal code preserved today?",
+    "answer": "Code of Hammurabi"
+  },
+  {
+    "question": "By how many degrees does temperature drop for every 1,000m of elevation?",
+    "answer": "6°C"
   }
 ]
