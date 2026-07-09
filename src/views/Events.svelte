@@ -21,6 +21,32 @@
   let section = 'upcoming'; // 'upcoming' | 'recent'
   let refreshTimer;
   let tickTimer;
+  let notified = new Set();
+
+  /* ----- Browser notifications --------------------------------------- */
+
+  function requestNotifyPermission() {
+    if (!('Notification' in window)) return;
+    if (Notification.permission === 'default') Notification.requestPermission();
+  }
+
+  function sendNotify(title, body) {
+    if (!('Notification' in window) || Notification.permission !== 'granted') return;
+    try { new Notification(title, { body, icon: '/cs-util-logo.png' }); } catch (e) {}
+  }
+
+  function checkNotifications() {
+    if (!('Notification' in window) || Notification.permission !== 'granted') return;
+    for (const ev of enrichedUpcoming) {
+      if (ev.msLeft > 0 && ev.msLeft <= 1500) {
+        const key = ev.event + '@' + new Date(ev.nextUtc).toISOString().slice(0, 10) + '-' + ev.serverTime;
+        if (!notified.has(key)) {
+          notified.add(key);
+          sendNotify(ev.event, ev.message || `${ev.category} event starting now!`);
+        }
+      }
+    }
+  }
 
   /* ----- Time math --------------------------------------------------- */
 
@@ -89,7 +115,11 @@
 
   onMount(() => {
     load();
-    tickTimer    = setInterval(() => (now = Date.now()), 1000);
+    requestNotifyPermission();
+    tickTimer    = setInterval(() => {
+      now = Date.now();
+      checkNotifications();
+    }, 1000);
     refreshTimer = setInterval(() => load(false), 5 * 60 * 1000);
   });
 
