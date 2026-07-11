@@ -153,7 +153,7 @@
   },
   {
     "question": "Into which chemical category do most of our daily staple foods fall?",
-    "answer": "Neutral"
+    "answer": "Acidic"
   },
   {
     "question": "What is Ali Baba's nationality in the tale \"Ali Baba and the Forty Thieves\"?",
@@ -462,5 +462,41 @@
   {
     "question": "By how many degrees does temperature drop for every 1,000m of elevation?",
     "answer": "6°C"
+  },
+    {
+    "question": "Which part of a double-axle passenger bus is the bumpiest?",
+    "answer": "Rear"
+  },
+  {
+    "question": "Into how many official constellations have astronomers divided the night sky?",
+    "answer": "88"
+  },
+  {
+    "question": "To which of the following does the term \"Particle Beam Weapon\" refer?",
+    "answer": "Laser"
+  },
+    {
+    "question": "Which of the following films was directed by Steven Spielberg?",
+    "answer": "Schindler's List"
+  },
+  {
+    "question": "How many bells are housed in the Leaning Tower of Pisa?",
+    "answer": "7"
+  },
+  {
+    "question": "Which country is famously nicknamed the \"Land of a Thousand Lakes\"?",
+    "answer": "Finland"
+  },
+  {
+    "question": "What is the maximum percentage of the moon's surface visible from Earth?",
+    "answer": "0.59"
+  },
+  {
+    "question": "Which constellation contains the star Altair?",
+    "answer": "Aquila"
+  },
+  {
+    "question": "In what year was the United States Declaration of Independence signed?",
+    "answer": "1776"
   }
 ]

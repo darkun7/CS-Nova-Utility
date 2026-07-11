@@ -22,21 +22,34 @@
   let refreshTimer;
   let tickTimer;
   let notified = new Set();
+  let notifyEnabled = false;
 
   /* ----- Browser notifications --------------------------------------- */
 
-  function requestNotifyPermission() {
-    if (!('Notification' in window)) return;
-    if (Notification.permission === 'default') Notification.requestPermission();
+  $: notifySupported = typeof Notification !== 'undefined';
+
+  function toggleNotify() {
+    if (!notifySupported) return;
+    if (Notification.permission === 'granted') {
+      notifyEnabled = !notifyEnabled;
+      if (notifyEnabled) sendNotify('Notifications enabled', 'You will be notified when events start.');
+      return;
+    }
+    Notification.requestPermission().then(perm => {
+      if (perm === 'granted') {
+        notifyEnabled = true;
+        sendNotify('Notifications enabled', 'You will be notified when events start.');
+      }
+    });
   }
 
   function sendNotify(title, body) {
-    if (!('Notification' in window) || Notification.permission !== 'granted') return;
-    try { new Notification(title, { body, icon: '/cs-util-logo.png' }); } catch (e) {}
+    if (!notifySupported || Notification.permission !== 'granted') return;
+    try { new Notification(title, { body }); } catch (e) { console.warn('Notify failed', e); }
   }
 
   function checkNotifications() {
-    if (!('Notification' in window) || Notification.permission !== 'granted') return;
+    if (!notifyEnabled || !notifySupported || Notification.permission !== 'granted') return;
     for (const ev of enrichedUpcoming) {
       if (ev.msLeft > 0 && ev.msLeft <= 1500) {
         const key = ev.event + '@' + new Date(ev.nextUtc).toISOString().slice(0, 10) + '-' + ev.serverTime;
@@ -115,7 +128,6 @@
 
   onMount(() => {
     load();
-    requestNotifyPermission();
     tickTimer    = setInterval(() => {
       now = Date.now();
       checkNotifications();
@@ -211,6 +223,15 @@
       {section === 'upcoming' ? 'Upcoming Events' : 'Recent Events'}
     </span>
     <span slot="actions">
+      {#if notifySupported}
+        <button
+          class="btn {notifyEnabled ? 'text-emerald-400 border-emerald-700/50' : 'text-slate-500'}"
+          on:click={toggleNotify}
+          title={notifyEnabled ? 'Notifications on' : 'Enable notifications'}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </button>
+      {/if}
       <button class="btn" on:click={() => load(true)} disabled={loading}>
         {loading ? 'Loading…' : 'Refresh'}
       </button>
