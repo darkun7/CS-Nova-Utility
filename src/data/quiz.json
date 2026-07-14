@@ -363,7 +363,7 @@
     "question": "Which of the world's seven continents has the smallest total land area?",
     "answer": "Oceania"
   },
-    {
+  {
     "question": "Who is the Goddess of Love and Beauty in ancient Greek mythology?",
     "answer": "Aphrodite"
   },
@@ -395,7 +395,7 @@
     "question": "In which century were the first African slaves transported to Haiti?",
     "answer": "16th Century"
   },
-    {
+  {
     "question": "What was the original practical purpose of the long jump in ancient times?",
     "answer": "Escaping beasts"
   },
@@ -423,7 +423,7 @@
     "question": "Which composer is famously known as the \"Poet of the Piano\"?",
     "answer": "Chopin"
   },
-    {
+  {
     "question": "How much time after application does it take for perfume to reach its peak scent?",
     "answer": "40 mins"
   },
@@ -443,7 +443,7 @@
     "question": "By how many times does the volume of a sphere increase if its diameter is doubled?",
     "answer": "8x"
   },
-    {
+  {
     "question": "Above what minimum caliber (in mm) is a weapon classified as artillery?",
     "answer": "20 mm"
   },
@@ -463,7 +463,7 @@
     "question": "By how many degrees does temperature drop for every 1,000m of elevation?",
     "answer": "6°C"
   },
-    {
+  {
     "question": "Which part of a double-axle passenger bus is the bumpiest?",
     "answer": "Rear"
   },
@@ -475,7 +475,7 @@
     "question": "To which of the following does the term \"Particle Beam Weapon\" refer?",
     "answer": "Laser"
   },
-    {
+  {
     "question": "Which of the following films was directed by Steven Spielberg?",
     "answer": "Schindler's List"
   },
@@ -498,5 +498,53 @@
   {
     "question": "In what year was the United States Declaration of Independence signed?",
     "answer": "1776"
+  },
+   {
+    "question": "Which symbol is universally used on electronics to represent volume control?",
+    "answer": "VOLUME"
+  },
+  {
+    "question": "Which matter makes up more than 50% of the dry weight of a biological cell?",
+    "answer": "Protein"
+  },
+  {
+    "question": "Which of the following is NOT one of the events in the modern Olympic Pentathlon?",
+    "answer": "High Jump"
+  },
+  {
+    "question": "In what year was the United States Declaration of Independence signed?",
+    "answer": "1776"
+  },
+  {
+    "question": "Which mountain range holds the record for being the longest in the world?",
+    "answer": "Andes"
+  },
+  {
+    "question": "How many holes are there on a standard professional golf course?",
+    "answer": "18"
+  },
+  {
+    "question": "Which country is famously nicknamed the \"Land of a Thousand Lakes\"?",
+    "answer": "Finland"
+  },
+  {
+    "question": "Which sovereign nation does NOT maintain a standing army?",
+    "answer": "Andorra"
+  },
+  {
+    "question": "In what year was the United States Declaration of Independence signed?",
+    "answer": "1776"
+  },
+  {
+    "question": "What does the movie rating \"PG\" stand for in the US film system?",
+    "answer": "Parental Guidance"
+  },
+  {
+    "question": "Which institution is considered the largest university system in the world?",
+    "answer": "SUNY"
+  },
+  {
+    "question": "What is the recommended number of hours of sleep for a healthy adult per day?",
+    "answer": "7–8 hours"
   }
 ]
