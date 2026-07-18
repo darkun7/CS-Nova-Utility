@@ -524,10 +524,6 @@
     "answer": "18"
   },
   {
-    "question": "Which country is famously nicknamed the \"Land of a Thousand Lakes\"?",
-    "answer": "Finland"
-  },
-  {
     "question": "Which sovereign nation does NOT maintain a standing army?",
     "answer": "Andorra"
   },
@@ -546,5 +542,53 @@
   {
     "question": "What is the recommended number of hours of sleep for a healthy adult per day?",
     "answer": "7–8 hours"
+  },
+  {
+  "question": "How many years pass between each FIFA World Cup tournament?",
+  "answer": "4 years"
+  },
+  {
+    "question": "Which of the following creatures is classified as an insect?",
+    "answer": "Flea"
+  },
+  {
+    "question": "Which of the following is currently considered the deadliest disease worldwide?",
+    "answer": "Heart Disease"
+  },
+  {
+    "question": "What is the numerical value of the Golden Ratio?",
+    "answer": "1.618"
+  },
+  {
+    "question": "In which city is the seat of the Dutch national government located?",
+    "answer": "The Hague"
+  },
+  {
+    "question": "At approximately what age does the average human reach their final height?",
+    "answer": "16-20"
+  },
+  {
+    "question": "During which season do mirages most frequently occur?",
+    "answer": "Summer"
+  },
+    {
+    "question": "In which city is the seat of the Dutch national government located?",
+    "answer": "The Hague"
+  },
+  {
+    "question": "Which of the following works was written by Ernest Hemingway?",
+    "answer": "The Old Man and the Sea"
+  },
+  {
+    "question": "Which composer is known as the \"King of Songs\" for writing over 600 works?",
+    "answer": "Schubert"
+  },
+  {
+    "question": "At what Celsius temperature does water reach its maximum density?",
+    "answer": "4°C"
+  },
+  {
+    "question": "Which country is famously nicknamed the \"Land of a Thousand Lakes\"?",
+    "answer": "Finland"
   }
 ]
