@@ -12,10 +12,6 @@
     "answer": "7–8 hours"
   },
   {
-    "question": "Which of these is NOT a major poetry collection by Rabindranath Tagore?",
-    "answer": "Red Oleanders"
-  },
-  {
     "question": "In what year was China’s first Antarctic station, Great Wall Station, completed?",
     "answer": "February 1985"
   },
@@ -495,10 +491,6 @@
     "question": "Which constellation contains the star Altair?",
     "answer": "Aquila"
   },
-  {
-    "question": "In what year was the United States Declaration of Independence signed?",
-    "answer": "1776"
-  },
    {
     "question": "Which symbol is universally used on electronics to represent volume control?",
     "answer": "VOLUME"
@@ -510,10 +502,6 @@
   {
     "question": "Which of the following is NOT one of the events in the modern Olympic Pentathlon?",
     "answer": "High Jump"
-  },
-  {
-    "question": "In what year was the United States Declaration of Independence signed?",
-    "answer": "1776"
   },
   {
     "question": "Which mountain range holds the record for being the longest in the world?",
@@ -528,20 +516,12 @@
     "answer": "Andorra"
   },
   {
-    "question": "In what year was the United States Declaration of Independence signed?",
-    "answer": "1776"
-  },
-  {
     "question": "What does the movie rating \"PG\" stand for in the US film system?",
     "answer": "Parental Guidance"
   },
   {
     "question": "Which institution is considered the largest university system in the world?",
     "answer": "SUNY"
-  },
-  {
-    "question": "What is the recommended number of hours of sleep for a healthy adult per day?",
-    "answer": "7–8 hours"
   },
   {
   "question": "How many years pass between each FIFA World Cup tournament?",
@@ -634,5 +614,29 @@
   {
     "question": "What is the approximate thickness of the Earth's atmosphere?",
     "answer": "3,000 km"
+  },
+  {
+    "question": "Which artist painted the legendary masterpiece \"Mona Lisa\"?",
+    "answer": "Da Vinci"
+  },
+  {
+    "question": "How many stars are featured on the current flag of the United States?",
+    "answer": "50"
+  },
+  {
+    "question": "Which star is the closest neighbor to our solar system (besides the Sun)?",
+    "answer": "Proxima Centauri"
+  },
+  {
+    "question": "Which ancient scientist is famously known as the \"God of Mathematics\"?",
+    "answer": "Archimedes"
+  },
+  {
+    "question": "Which of the following commodities has the lowest price elasticity of demand?",
+    "answer": "Salt"
+  },
+  {
+    "question": "In what year did the First World War begin?",
+    "answer": "1914"
   }
 ]
